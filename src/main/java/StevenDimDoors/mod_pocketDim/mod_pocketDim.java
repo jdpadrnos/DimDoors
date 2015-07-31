@@ -92,7 +92,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(modid = mod_pocketDim.modid, name = "Dimensional Doors", version = mod_pocketDim.version)
 public class mod_pocketDim
 {
-	public static final String version = "2.2.5-test";
+	public static final String version = "2.2.5-test9";
 	public static final String modid = "dimdoors";
 	
 	//TODO need a place to stick all these constants
@@ -317,15 +317,18 @@ public class mod_pocketDim
 	{
 		try
 		{
-			PocketManager.unload();
-			deathTracker.writeToFile();
-			deathTracker = null;
+			PocketManager.tryUnload();
+            if (deathTracker != null) {
+                deathTracker.writeToFile();
+                deathTracker = null;
+            }
 			worldProperties = null;
 			currrentSaveRootDirectory = null;
 			
 			// Unregister all tick receivers from serverTickHandler to avoid leaking
 			// scheduled tasks between single-player game sessions
-			serverTickHandler.unregisterReceivers();
+            if (serverTickHandler != null)
+			    serverTickHandler.unregisterReceivers();
 			spawner = null;
 			riftRegenerator = null;
 			limboDecayScheduler = null;

@@ -348,7 +348,7 @@ public class BlockRift extends Block implements ITileEntityProvider
 			// may have low hardness to make them easier to build with. However, block.getExplosionResistance()
 			// is designed to receive an entity, the source of the blast. We have no entity so
 			// I've set this to access blockResistance directly. Might need changing later.
-			
+
 			return (block.blockResistance >= MIN_IMMUNE_RESISTANCE ||
 					modBlocksImmuneToRift.contains(block) ||
 					blocksImmuneToRift.contains(block));
